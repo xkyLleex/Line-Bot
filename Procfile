@@ -1,1 +1,1 @@
-worker: python LineBot.py
+web: python LineBot.py runserver 0.0.0.0$PORT
