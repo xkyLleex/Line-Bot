@@ -1,1 +1,1 @@
-web: python LineBot.py --server.port=$PORT
+web: python LineBot.py --server.port=5000
