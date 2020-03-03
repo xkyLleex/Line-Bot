@@ -1,1 +1,1 @@
-web: python LineBot.py --server.port=5000
+web: gunicorn app:app
