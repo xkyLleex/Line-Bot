@@ -1,1 +1,1 @@
-web: gunicorn kylleelinebot:app
+web: gunicorn app:app
