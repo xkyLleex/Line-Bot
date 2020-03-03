@@ -44,7 +44,7 @@ def handle_message(event):
     if input_text == "//help":
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text="input:taipeimrt"))
     if input_text == "taipeimrt"
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=input_text))
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text="https://www.travelking.com.tw/eng/tourguide/taipei/taipeimrt/images/map.png"))
 
 
 if __name__ == "__main__":
