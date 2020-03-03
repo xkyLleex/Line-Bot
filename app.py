@@ -12,8 +12,8 @@ from linebot.models import (
 
 app = Flask(__name__)
 
-channel_secret = 'SECRET_GET_FROM_HEROKU'
-channel_access_token = 'ACCESS_TOKEN_GET_FROM_HEROKU'
+channel_secret = '13d5c994d2cf69a6dfec00d8c2e38ade' #SECRET_GET_FROM_HEROKU
+channel_access_token = '5qlESxRJZWdeKuRH60FNDJAtPtA96RfMxLtTIliG4qeYUVpKPjTfuJT5rZ92U8fPiM4qmzWT96fnmam7Zf5AFE5KuIt4F9LL9qzEVxnG3sxHLBkA1bxLo9MAfU1N+gOjdi1GcxkYGj9ZxxjFsXJJpwdB04t89/1O/w1cDnyilFU=' #ACCESS_TOKEN_GET_FROM_HEROKU
 
 line_bot_api = LineBotApi(channel_access_token)
 handler = WebhookHandler(channel_secret)
