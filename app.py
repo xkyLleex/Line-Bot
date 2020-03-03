@@ -7,7 +7,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
+    MessageEvent, TextMessage, TextSendMessage, ImageSendMessage,
 )
 
 app = Flask(__name__)
@@ -44,7 +44,12 @@ def handle_message(event):
     if input_text == "//help":
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text="input:taipeimrt"))
     if input_text == "taipeimrt":
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text="https://www.travelking.com.tw/eng/tourguide/taipei/taipeimrt/images/map.png"))
+        png = "https://www.travelking.com.tw/eng/tourguide/taipei/taipeimrt/images/map.png"
+        message = ImageSendMessage(
+            original_content_url = png,
+            preview_image_url = png
+        )
+        line_bot_api.reply_message(event.reply_token, message)
 
 
 if __name__ == "__main__":
