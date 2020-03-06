@@ -41,16 +41,36 @@ def callback():
 def handle_message(event):
     input_text = event.message.text
     input_text = str.lower(input_text)
-    if input_text == "//help":
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text="input:taipeimrt"))
-    if input_text == "taipeimrt":
+    input_text_list = input_text.split(" ")
+    if input_text_list[0] == "//help":
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text="input://taipeimrt\ninput://rand a b(a,b為整數)"))
+    elif input_text_list[0] == "//taipeimrt":
         png = "https://www.travelking.com.tw/eng/tourguide/taipei/taipeimrt/images/map.png"
         message = ImageSendMessage(
             original_content_url = png,
             preview_image_url = png
         )
         line_bot_api.reply_message(event.reply_token, message)
-
+    elif input_text_list[0] == "//rand":
+        a = 0;b = 0
+        text_message = ""
+        try:
+            a = (int)(input_text_list[1])
+            b = (int)(input_text_list[2])
+        except Exception as e:
+            text_message = "請輸入//rand a b,可輸出a-b(a,b為整數)間的隨機整數\nEX://rand 1 5"
+        else:
+            text_message = "隨機整數輸出:{}".format(random.randint(a,b))
+        finally:
+            line_bot_api.reply_message(
+                event.reply_token, 
+                TextSendMessage(text=text_message)
+            )
+    else:
+        line_bot_api.reply_message(
+            event.reply_token, 
+            TextSendMessage(text=input_text)
+        )
 
 if __name__ == "__main__":
     app.run()
