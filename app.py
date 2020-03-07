@@ -1,5 +1,5 @@
 from flask import Flask, request, abort
-import random
+import appfunc
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -61,7 +61,8 @@ def handle_message(event):
         except Exception as e:
             text_message = "請輸入//rand a b,可輸出a-b(a,b為整數)間的隨機整數\nEX://rand 1 5"
         else:
-            text_message = "隨機整數輸出:{}".format(random.randint(a,b))
+            func = appfunc.rand(a,b)
+            text_message = "隨機整數輸出:{}".format(func.func())
         finally:
             line_bot_api.reply_message(
                 event.reply_token, 
