@@ -66,7 +66,7 @@ def handle_message(event):
             else:
                 line_bot_api.reply_message(
                     event.reply_token,
-                    TextSendMessage(text=text_message)
+                    TextSendMessage(text=text_message.replace(" ",""))
                 )
                 
     elif FrontText == "//map" or FrontText == "//地圖":#####_map_##### 
@@ -74,6 +74,7 @@ def handle_message(event):
             func = appfunc.map(input_text_list[1])
         except:
             text_message = "請輸入地圖名，有\ntaipeimrt"
+            png = ""
         else:
             png = func.mapfunc()
             if png == None:
@@ -87,7 +88,7 @@ def handle_message(event):
             if isinstance(png,str):
                 line_bot_api.reply_message(
                     event.reply_token, 
-                    TextSendMessage(text=text_message)
+                    TextSendMessage(text=text_message.replace(" ",""))
                 )
             else:
                 line_bot_api.reply_message(
@@ -108,7 +109,7 @@ def handle_message(event):
         finally:
             line_bot_api.reply_message(
                 event.reply_token, 
-                TextSendMessage(text=text_message)
+                TextSendMessage(text=text_message.replace(" ",""))
             )
     elif FrontText == "//weather" or FrontText == "//天氣":#####_weather_#####
         func = appfunc.weather(input_text_list)
@@ -125,7 +126,7 @@ def handle_message(event):
         else:
             line_bot_api.reply_message(
                 event.reply_token, 
-                TextSendMessage(text=png)
+                TextSendMessage(text=png.replace(" ",""))
             )  
     else:
         line_bot_api.reply_message(
