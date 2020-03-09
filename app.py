@@ -48,12 +48,11 @@ def handle_message(event):
         try:
             func = appfunc.helps(input_text_list[1])
         except:
-            text_message = '''
-            指令：(前面加上//，之間要空格) EX://rand 1 5\n
-            //map [地圖名稱] 或是 //地圖 [地圖名稱]\n
-            //rand [a,b] 或是 //隨機 [a,b] (a,b為整數)\n
-            //weather [功能] [參數] 或是 //天氣 [功能] [參數]\n
-            []內詳情請打//help [指令] EX://help map
+            text_message = '''指令：(前面加上//，之間要空格) EX://rand 1 5
+            //map [地圖名稱] 或是 //地圖 [地圖名稱]
+            //rand [a,b] 或是 //隨機 [a,b] (a,b為整數)
+            //weather [功能] [參數] 或是 //天氣 [功能] [參數]
+            指令詳情請打//help [指令] EX://help map
             '''
         else:
             text_message = func.helpsfunc()
