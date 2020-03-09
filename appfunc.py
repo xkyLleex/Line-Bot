@@ -6,20 +6,20 @@ class helps:
     def helpsfunc(self):
         if self.command == "map" or self.command == "地圖":
             return '''使用方式：//map [地圖名稱] 或是 //地圖 [地圖名稱]
-                可查看地圖(輸出為圖片檔)
-                EX://map taipeimrt
-                地圖名稱:taipeimrt(台北捷運or臺北捷運)
+________________可查看地圖(輸出為圖片檔)
+________________EX://map taipeimrt
+________________地圖名稱:taipeimrt(台北捷運or臺北捷運)
                 '''
         elif self.command == "rand" or self.command == "隨機":
             return '''使用方式：//rand a b 或是 //隨機 a b
-                可輸出a-b(a,b為整數)間的隨機整數
-                EX://rand 1 5
+________________可輸出a-b(a,b為整數)間的隨機整數
+________________EX://rand 1 5
                 '''
         elif self.command == "weather" or self.command == "天氣":
             return '''使用方式：//weather [功能] [參數] 或是 //天氣 [功能] [參數]
-                可查看天氣(輸出為圖片檔)EX://weather radar 30 (輸出雷達回波圖前調30分鐘)
-                功能：radar(雷達) [參數]往前調整回波圖時間，可不輸入，若輸入只能輸入0-120(以分為單位)
-                analysis(地面天氣圖) [參數空即可](Taiwan:UTC+8)
+________________可查看天氣(輸出為圖片檔)EX://weather radar 30 (輸出雷達回波圖前調30分鐘)
+________________功能：radar(雷達) [參數]往前調整回波圖時間，可不輸入，若輸入只能輸入0-120(以分為單位)
+________________analysis(地面天氣圖) [參數空即可](Taiwan:UTC+8)
                 '''
 class maps:
     def __init__(self,maptext):
@@ -52,8 +52,10 @@ class weather:
                 return self.analysis()
             else:
                 return "功能錯誤，詳情輸入//help weather"
-        except:
+        except Exception as e:
             return "請輸入功能，詳情輸入//help weather"
+            print(e)
+            print(input_text)
     def radar(self):#input_text = //weather radar [min]
         delaytime=0
         try:

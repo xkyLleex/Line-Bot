@@ -49,10 +49,10 @@ def handle_message(event):
             func = appfunc.helps(input_text_list[1])
         except:
             text_message = '''指令：(前面加上//，之間要空格) EX://rand 1 5
-            //map [地圖名稱] 或是 //地圖 [地圖名稱]
-            //rand [a,b] 或是 //隨機 [a,b] (a,b為整數)
-            //weather [功能] [參數] 或是 //天氣 [功能] [參數]
-            指令詳情請打//help [指令] EX://help map
+____________//map [地圖名稱] 或是 //地圖 [地圖名稱]
+____________//rand [a,b] 或是 //隨機 [a,b] (a,b為整數)
+____________//weather [功能] [參數] 或是 //天氣 [功能] [參數]
+____________指令詳情請打//help [指令] EX://help map
             '''
         else:
             text_message = func.helpsfunc()
@@ -65,7 +65,7 @@ def handle_message(event):
             else:
                 line_bot_api.reply_message(
                     event.reply_token,
-                    TextSendMessage(text=text_message.replace(" ",""))
+                    TextSendMessage(text=text_message.replace("_",""))
                 )
                 
     elif FrontText == "//map" or FrontText == "//地圖":#####_map_##### 
@@ -87,7 +87,7 @@ def handle_message(event):
             if isinstance(png,str):
                 line_bot_api.reply_message(
                     event.reply_token, 
-                    TextSendMessage(text=text_message.replace(" ",""))
+                    TextSendMessage(text=text_message)
                 )
             else:
                 line_bot_api.reply_message(
@@ -108,7 +108,7 @@ def handle_message(event):
         finally:
             line_bot_api.reply_message(
                 event.reply_token, 
-                TextSendMessage(text=text_message.replace(" ",""))
+                TextSendMessage(text=text_message)
             )
     elif FrontText == "//weather" or FrontText == "//天氣":#####_weather_#####
         func = appfunc.weather(input_text_list)
@@ -125,7 +125,7 @@ def handle_message(event):
         else:
             line_bot_api.reply_message(
                 event.reply_token, 
-                TextSendMessage(text=png.replace(" ",""))
+                TextSendMessage(text=png)
             )  
     else:
         line_bot_api.reply_message(
