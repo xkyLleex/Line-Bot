@@ -68,7 +68,8 @@ ____________指令詳情請打//help [指令] EX://help map
                     TextSendMessage(text=text_message.replace("_",""))
                 )
                 
-    elif FrontText == "//map" or FrontText == "//地圖":#####_map_##### 
+    elif FrontText == "//map" or FrontText == "//地圖":#####_map_#####
+        findcheck = False
         try:
             func = appfunc.maps(input_text_list[1])
         except:
@@ -83,16 +84,17 @@ ____________指令詳情請打//help [指令] EX://help map
                     original_content_url = png,
                     preview_image_url = png
                 )
+                findcheck = True
         finally:
-            if isinstance(png,str):
+            if findcheck:
                 line_bot_api.reply_message(
                     event.reply_token, 
-                    TextSendMessage(text=text_message)
+                    message
                 )
             else:
                 line_bot_api.reply_message(
                     event.reply_token, 
-                    message
+                    TextSendMessage(text=text_message)
                 )
 
     elif FrontText == "//rand" or FrontText == "//隨機":#####_rand_##### 
@@ -117,6 +119,10 @@ ____________指令詳情請打//help [指令] EX://help map
             message = ImageSendMessage(
                 original_content_url = png,
                 preview_image_url = png
+            )
+            line_bot_api.reply_message(
+                event.reply_token, 
+                TextSendMessage(text=func.message)
             )
             line_bot_api.reply_message(
                 event.reply_token, 
