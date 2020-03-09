@@ -115,10 +115,6 @@ ____________指令詳情請打//help [指令] EX://help map
         func = appfunc.weather(input_text_list)
         png = func.weatherfunc()
         if png.find("https",0,5) == 0:
-            line_bot_api.reply_message(
-                event.reply_token, 
-                TextSendMessage(text=func.message)
-            )
             message = ImageSendMessage(
                 original_content_url = png,
                 preview_image_url = png

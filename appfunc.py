@@ -60,6 +60,8 @@ class weather:
         delaytime=0
         try:
             if self.input_text[2] != "":
+                if self.input_text[2] == "no" or self.input_text[2] == "none" or self.input_text[2] == "沒圖":
+                    return "如果沒有圖就表示還未產生，把時間往前調就行(預設已往前調10Min)\n往前調 x 分鐘指令=>//weather rader x"
                 try:
                     delaytime=int(self.input_text[2]) + 10
                 except:
@@ -74,7 +76,6 @@ class weather:
             TW_time = pytz.timezone(pytz.country_timezones('tw')[0])
             nowtimes = datetime.datetime.now(TW_time) - datetime.timedelta(minutes=delaytime)
         minute = int(nowtimes.strftime("%M"))
-        self.message = "如果沒有圖就表示還未產生，把時間往前調就行(預設已往前調10Min)\n往前調 x 分鐘指令=>//weather rader x"
         if minute >= 10:
             return "https://www.cwb.gov.tw/V7/observe/radar/Data/HD_Radar/CV1_3600_{}{}.png".format(nowtimes.strftime("%Y%m%d%H"),int(minute/10)*10)
         else:
