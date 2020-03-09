@@ -70,7 +70,7 @@ def handle_message(event):
                 
     elif FrontText == "//map" or FrontText == "//地圖":#####_map_##### 
         try:
-            func = appfunc.map(input_text_list[1])
+            func = appfunc.maps(input_text_list[1])
         except:
             text_message = "請輸入地圖名，有\ntaipeimrt"
             png = ""

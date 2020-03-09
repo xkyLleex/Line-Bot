@@ -45,12 +45,15 @@ class weather:
         self.message = ""
         self.input_text = args
     def weatherfunc(self):
-        if self.input_text[1] == "radar" or self.input_text[1] == "雷達":
-            return self.radar()
-        elif self.input_text[1] == "analysis" or self.input_text[1] == "地面天氣圖":
-            return self.analysis()
-        else:
-            return "功能錯誤，詳情輸入//help weather"
+        try:
+            if self.input_text[1] == "radar" or self.input_text[1] == "雷達":
+                return self.radar()
+            elif self.input_text[1] == "analysis" or self.input_text[1] == "地面天氣圖":
+                return self.analysis()
+            else:
+                return "功能錯誤，詳情輸入//help weather"
+        except:
+            return "請輸入功能，詳情輸入//help weather"
     def radar(self):#input_text = //weather radar [min]
         delaytime=0
         try:
