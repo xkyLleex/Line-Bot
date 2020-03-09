@@ -53,9 +53,8 @@ class weather:
             else:
                 return "功能錯誤，詳情輸入//help weather"
         except Exception as e:
-            return "請輸入功能，詳情輸入//help weather"
-            print(e)
-            print(input_text)
+            return (str)(e)#"請輸入功能，詳情輸入//help weather"
+
     def radar(self):#input_text = //weather radar [min]
         delaytime=0
         try:
