@@ -26,6 +26,7 @@ class maps:
         self.message = ""
         self.maptext = maptext
     def mapfunc(self):
+        png = ""
         if self.maptext == "taipeimrt" or self.maptext == "台北捷運" or self.maptext == "臺北捷運":
             png = "https://www.travelking.com.tw/eng/tourguide/taipei/taipeimrt/images/map.png"
         else:

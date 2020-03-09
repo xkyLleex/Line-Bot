@@ -72,9 +72,9 @@ ____________指令詳情請打//help [指令] EX://help map
         findcheck = False
         try:
             func = appfunc.maps(input_text_list[1])
+            text_message = ""
         except:
             text_message = "請輸入地圖名，有\ntaipeimrt"
-            png = ""
         else:
             png = func.mapfunc()
             if png == None:
