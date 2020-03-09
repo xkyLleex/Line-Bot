@@ -43,31 +43,90 @@ def handle_message(event):
     input_text = event.message.text
     input_text = str.lower(input_text)
     input_text_list = input_text.split(" ")
-    if input_text_list[0] == "//help":
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text="input://taipeimrt\ninput://rand a b(a,b為整數)"))
-    elif input_text_list[0] == "//taipeimrt":
-        png = "https://www.travelking.com.tw/eng/tourguide/taipei/taipeimrt/images/map.png"
-        message = ImageSendMessage(
-            original_content_url = png,
-            preview_image_url = png
-        )
-        line_bot_api.reply_message(event.reply_token, message)
-    elif input_text_list[0] == "//rand":
+    FrontText = input_text_list[0]
+    if FrontText == "//help":#####_help_##### 
+        try:
+            func = appfunc.helps(input_text_list[1])
+        except:
+            text_message = '''
+            指令：(前面加上//，之間要空格) EX://rand 1 5\n
+            //map [地圖名稱] 或是 //地圖 [地圖名稱]\n
+            //rand [a,b] 或是 //隨機 [a,b] (a,b為整數)\n
+            //weather [功能] [參數] 或是 //天氣 [功能] [參數]\n
+            []內詳情請打//help [指令] EX://help map
+            '''
+        else:
+            text_message = func.helpsfunc()
+        finally:
+            if text_message == None:
+                line_bot_api.reply_message(
+                    event.reply_token,
+                    TextSendMessage(text="未知指令，請輸入指令//help來查詢指令")
+                )
+            else:
+                line_bot_api.reply_message(
+                    event.reply_token,
+                    TextSendMessage(text=text_message)
+                )
+                
+    elif FrontText == "//map" or FrontText == "//地圖":#####_map_##### 
+        try:
+            func = appfunc.map(input_text_list[1])
+        except:
+            text_message = "請輸入地圖名，有\ntaipeimrt"
+        else:
+            png = func.mapfunc()
+            if png == None:
+                text_message = func.message
+            else:
+                message = ImageSendMessage(
+                    original_content_url = png,
+                    preview_image_url = png
+                )
+        finally:
+            if isinstance(png,str):
+                line_bot_api.reply_message(
+                    event.reply_token, 
+                    TextSendMessage(text=text_message)
+                )
+            else:
+                line_bot_api.reply_message(
+                    event.reply_token, 
+                    message
+                )
+
+    elif FrontText == "//rand" or FrontText == "//隨機":#####_rand_##### 
         a = 0;b = 0
-        text_message = ""
         try:
             a = (int)(input_text_list[1])
             b = (int)(input_text_list[2])
         except Exception as e:
-            text_message = "請輸入//rand a b,可輸出a-b(a,b為整數)間的隨機整數\nEX://rand 1 5"
+            text_message = "參數錯誤，請輸入//help rand來查詢用法"
         else:
             func = appfunc.rand(a,b)
-            text_message = "隨機整數輸出:{}".format(func.func())
+            text_message = "隨機整數輸出:{}".format(func.randfunc())
         finally:
             line_bot_api.reply_message(
                 event.reply_token, 
                 TextSendMessage(text=text_message)
             )
+    elif FrontText == "//weather" or FrontText == "//天氣":#####_weather_#####
+        func = appfunc.weather(input_text_list)
+        png = func.weatherfunc()
+        if png.find("https",0,5) == 0:
+            message = ImageSendMessage(
+                original_content_url = png,
+                preview_image_url = png
+            )
+            line_bot_api.reply_message(
+                event.reply_token, 
+                message
+            )
+        else:
+            line_bot_api.reply_message(
+                event.reply_token, 
+                TextSendMessage(text=png)
+            )  
     else:
         line_bot_api.reply_message(
             event.reply_token, 
