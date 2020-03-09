@@ -41,7 +41,7 @@ class rand:
         return random.randint(self.num1,self.num2)
 
 class weather:
-    def __init__(self,*args):
+    def __init__(self,args):
         self.message = ""
         self.input_text = args
     def weatherfunc(self):
@@ -53,7 +53,7 @@ class weather:
             else:
                 return "功能錯誤，詳情輸入//help weather"
         except Exception as e:
-            return (str)(e)#"請輸入功能，詳情輸入//help weather"
+            return "請輸入功能，詳情輸入//help weather"
 
     def radar(self):#input_text = //weather radar [min]
         delaytime=0
